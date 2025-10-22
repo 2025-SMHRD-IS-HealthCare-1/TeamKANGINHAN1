@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 | Shield for Her</title>
+
+    <style>
+      body {
+        font-family: "Pretendard", "Noto Sans KR", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .signup-container {
+        background: #fff;
+        padding: 40px 50px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 420px;
+        max-width: 90%;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #444;
+      }
+
+      input,
+      .form-select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 14px;
+        font-size: 0.95rem;
+        transition: border-color 0.2s;
+        background-color: #fff;
+      }
+
+      input:focus,
+      .form-select:focus {
+        border-color: #3b82f6;
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background-color: #3b82f6;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #2563eb;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 15px;
+      }
+
+      .footer a {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="signup-container">
+      <h1>회원가입</h1>
+
+      <label>이메일</label>
+      <input type="email" id="email" placeholder="example@email.com" />
+
+      <label>비밀번호</label>
+      <input type="password" id="pw" placeholder="8자 이상 비밀번호" />
+
+      <label>이름</label>
+      <input type="text" id="name" placeholder="홍길동" />
+
+      <label>휴대폰 번호</label>
+      <input type="text" id="phone" placeholder="010-1234-5678" />
+
+      <label>주소</label>
+      <input type="text" id="address" placeholder="서울특별시 강남구 ..." />
+
+      <label>비상연락처</label>
+      <input type="text" id="em_phone" placeholder="010-9876-5432" />
+
+      <label>디바이스 번호 (선택)</label>
+      <input
+        type="text"
+        id="device_no"
+        placeholder="등록된 장치가 있을 경우만 입력"
+      />
+
+      <!-- ✅ 수정된 선택 부분 -->
+      <label for="harassmentExp">범죄 피해 경험 여부</label>
+      <select
+        id="harassmentExp"
+        name="HARASSMENT_EXP"
+        class="form-select"
+        required
+      >
+        <option value="">선택해주세요</option>
+        <option value="0">없음</option>
+        <option value="1">있음</option>
+      </select>
+
+      <button id="joinBtn">회원가입</button>
+
+      <div class="footer">
+        이미 계정이 있으신가요? <a href="/login.html">로그인하기</a>
+      </div>
+    </div>
+
+    <script>
+      const joinBtn = document.getElementById("joinBtn");
+
+      joinBtn.addEventListener("click", async () => {
+        const EMAIL = document.getElementById("email").value;
+        const PASSWORD = document.getElementById("pw").value;
+        const NAME = document.getElementById("name").value;
+        const PHONE_NUMBER = document.getElementById("phone").value;
+        const ADDRESS = document.getElementById("address").value;
+        const EM_PHONE_NUMBER = document.getElementById("em_phone").value;
+        const DEVICE_NO = document.getElementById("device_no").value || null;
+        const HARASSMENT_EXP = document.getElementById("harassmentExp").value;
+
+        if (!EMAIL || !PASSWORD || !NAME) {
+          alert("이메일, 비밀번호, 이름은 필수입니다.");
+          return;
+        }
+
+        const res = await fetch("/api/members", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            EMAIL,
+            PASSWORD,
+            NAME,
+            PHONE_NUMBER,
+            ADDRESS,
+            EM_PHONE_NUMBER,
+            DEVICE_NO,
+            HARASSMENT_EXP,
+          }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.success) {
+          alert("회원가입 성공 🎉");
+          window.location.href = "/shield_for_her_dashboard.html";
+        } else {
+          alert("회원가입 실패 ❌: " + data.message);
+        }
+      });
+    </script>
+  </body>
+</html>

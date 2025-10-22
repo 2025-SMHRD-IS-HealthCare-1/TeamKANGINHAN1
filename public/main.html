@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main</title>
+  </head>
+  <body>
+    <h1>API 회원관리 시스템</h1>
+    <div id="userInfo"></div>
+    <a href="/register">회원가입 페이지</a>
+    <a href="/login">로그인 페이지</a>
+    <a href="/update">회원정보 수정 페이지</a>
+    <a href="/delete">회원탈퇴 페이지</a>
+  </body>
+
+  <script>
+    function parseJwt(token) {
+      try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    const token = localStorage.getItem("token");
+    const payload = parseJwt(token);
+    console.log(payload);
+
+    document.getElementById(
+      "userInfo"
+    ).innerText = `${payload.nick}님 환영합니다!`;
+  </script>
+</html>

@@ -1,0 +1,36 @@
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const publicDir = path.join(__dirname, "..", "public");
+const logger = require("../middlewares/logger");
+
+// 미들웨어 개별 적용
+// router에 경로와 (req, res)콜백함수 가운데에 미들웨어를 추가로 인자값의 형태로 넣어주면
+// 해당 라우터에만 적용된다
+
+// 메인 페이지
+router.get("/", logger, (req, res) => {
+  res.sendFile(path.join(publicDir, "shield_for_her_dashboard.html"));
+});
+
+// 회원가입 페이지
+router.get("/register", (req, res) => {
+  res.sendFile(path.join(publicDir, "register.html"));
+});
+
+// 로그인 페이지
+router.get("/login", (req, res) => {
+  res.sendFile(path.join(publicDir, "shield_for_her_login.html"));
+});
+
+// 회원정보 수정 페이지
+router.get("/update", (req, res) => {
+  res.sendFile(path.join(publicDir, "update.html"));
+});
+
+// 회원 탈퇴 페이지
+router.get("/delete", (req, res) => {
+  res.sendFile(path.join(publicDir, "delete.html"));
+});
+
+module.exports = router;
