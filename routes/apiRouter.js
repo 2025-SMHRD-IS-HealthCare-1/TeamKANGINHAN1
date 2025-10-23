@@ -147,4 +147,22 @@ router.patch("/members", verifyToken, (req, res) => {
   });
 });
 
+// ✅ 로그인한 사용자가 글 작성
+router.post("/posts", verifyToken, async (req, res) => {
+  try {
+    const { category, title, content } = req.body;
+    const { email, name } = req.user; // ✅ JWT 토큰에서 사용자 정보 추출
+
+    const sql = `
+      INSERT INTO T_COMUNITY
+      (EMAIL, CATEGORY, TITLE, CONTENT, FILE, VIEW_COUNT, LIKE_COUNT, IS_DELETED, IS_VERIFIED) VALUES (?, ?, ?, ?, NULL, 0, 0, 0, 0)`;
+    await db.query(sql, [email, category, title, content]);
+
+    res.json({ success: true, message: "게시글 등록 완료" });
+  } catch (err) {
+    console.error("게시글 저장 오류:", err);
+    res.status(500).json({ success: false, error: "DB 저장 실패" });
+  }
+});
+
 module.exports = router;

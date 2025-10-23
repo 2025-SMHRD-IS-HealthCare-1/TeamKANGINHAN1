@@ -1,166 +1,134 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SHIELD FOR HER</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.294.0/lucide.min.css">
-    <link rel="stylesheet" href="community.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>커뮤니티 - SHIELD FOR HER</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/community.css" />
   </head>
-<body>
-<!-- Modal Backdrop -->
-    <div class="modal-backdrop" id="modalBackdrop" onclick="closeAllModals()"></div>
-<!-- Alert Modal -->
-    <div class="alert-modal" id="alertModal">
-      <button class="alert-close" onclick="closeAlert()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      <div class="alert-icon-wrapper">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </div>
-<!-- Signup Modal -->
-    <div class="signup-modal" id="signupModal">
-      <button class="modal-close" onclick="closeSignup()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      <h2>회원가입</h2>
-      
-      <!-- Social Login Section -->
-      <div style="margin-bottom: 32px;">
-        <button class="btn-kakao" onclick="handleKakaoSignup()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 3C6.48 3 2 6.58 2 11c0 2.8 1.8 5.27 4.5 6.75L5.5 21l4.5-2.25c.65.08 1.32.12 2 .12 5.52 0 10-3.58 10-8s-4.48-8-10-8z"/>
-          </svg>
-          카카오톡으로 시작하기
-        </button>
-        
-        <div style="display: flex; align-items: center; gap: 16px; margin: 24px 0;">
-          <div style="flex: 1; height: 1px; background: var(--gray-200);"></div>
-<!-- Device Connection Modal -->
-    <div class="device-modal" id="deviceModal">
-      <button class="modal-close" onclick="closeDevice()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      
-      <div class="device-header">
-        <div class="device-icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        </div>
-<!-- Notification Panel -->
-    <div class="notification-panel" id="notificationPanel">
-      <div class="notification-header">
-        <h3>알림</h3>
-        <button class="clear-all-btn" onclick="clearAllNotifications()">모두 지우기</button>
-      </div>
-<!-- Settings Modal -->
-    <div class="settings-modal" id="settingsModal">
-      <button class="modal-close" onclick="closeSettings()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-      
-      <div class="settings-header">
-        <div class="settings-header-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32l2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12m11.32-11.32l2.12-2.12"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-<!-- Navigation -->
+
+  <body>
+    <!-- Navigation -->
     <nav class="nav">
       <div class="nav-content">
         <div class="brand">SHIELD FOR HER</div>
         <div class="nav-actions">
-          <button class="icon-btn" title="알림" onclick="openNotifications()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-            <span class="badge" id="notificationBadge">3</span>
+          <button class="icon-btn" title="알림">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+            </svg>
+            <span class="badge">3</span>
           </button>
-          <button class="icon-btn" title="설정" onclick="openSettings()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <button class="icon-btn" title="설정">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 1v6m0 6v6m8.66-16.66l-4.24 4.24m-8.84 8.84L2.34 20.66m18.32 0l-4.24-4.24m-8.84-8.84L2.34 3.34"
+              />
+            </svg>
           </button>
         </div>
       </div>
     </nav>
-<!-- Community Content (Hidden by default) -->
-    <div id="communityContent" >
-      <div style="max-width: 1400px; margin: 0 auto; padding: 40px 24px;">
-        <!-- Header -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px;">
-          <div style="display: flex; align-items: center; gap: 16px;">
-            <button style="width: 48px; height: 48px; border-radius: 16px; border: none; background: var(--white); color: var(--gray-700); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); transition: all 0.2s;" onclick="closeCommunity()">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
-                <line x1="19" y1="12" x2="5" y2="12"/>
-                <polyline points="12 19 5 12 12 5"/>
-              </svg>
-            </button>
-            <h1 style="font-size: 36px; font-weight: 800; letter-spacing: -0.02em;">커뮤니티</h1>
-          </div>
-          <div style="display: flex; gap: 12px;">
-            <button style="padding: 14px 28px; border-radius: 14px; border: 1.5px solid var(--gray-200); background: var(--white); color: var(--gray-700); font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s;" onclick="openSettings()">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v6m0 6v6m8.66-16.66l-4.24 4.24m-8.84 8.84L2.34 20.66m18.32 0l-4.24-4.24m-8.84-8.84L2.34 3.34"/>
-              </svg>
-              설정
-            </button>
-            <button style="padding: 14px 28px; border-radius: 14px; border: none; background: linear-gradient(135deg, var(--blue), var(--purple)); color: var(--white); font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3); transition: all 0.2s;" onclick="openNewPost()">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              새 게시글
-            </button>
-          </div>
-        </div>
 
-        <!-- Category Tabs -->
-        <div style="display: flex; gap: 12px; margin-bottom: 32px; overflow-x: auto; padding-bottom: 8px;">
-          <button class="community-category-tab active" onclick="filterCommunityCategory('all')">전체</button>
-          <button class="community-category-tab" onclick="filterCommunityCategory('safety')">안전 정보</button>
-          <button class="community-category-tab" onclick="filterCommunityCategory('tip')">생활 팁</button>
-          <button class="community-category-tab" onclick="filterCommunityCategory('story')">경험 공유</button>
-          <button class="community-category-tab" onclick="filterCommunityCategory('qna')">질문과 답변</button>
-        </div>
+    <!-- Community Content -->
+    <div>
+      <!-- Header -->
+      <div>
+        <div>
+          <a href="/">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="width: 20px; height: 20px"
+            >
+              <line x1="19" y1="12" x2="5" y2="12" />
+              <polyline points="12 19 5 12 12 5" />
+            </svg>
+          </a>
 
-        <!-- Post Grid -->
-        <div id="communityPostGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-bottom: 48px;">
-          <!-- Posts will be generated by JavaScript -->
+          <h1>커뮤니티</h1>
         </div>
+        <div>
+          <button class="btn-secondary">설정</button>
+          <a href="./new_post.html" class="btn-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="width: 18px; height: 18px"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            새 게시글
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div>
+        <button
+          class="community-category-tab active"
+          onclick="filterCategory('all')"
+        >
+          전체
+        </button>
+        <button
+          class="community-category-tab"
+          onclick="filterCategory('safety')"
+        >
+          안전 정보
+        </button>
+        <button class="community-category-tab" onclick="filterCategory('tip')">
+          생활 팁
+        </button>
+        <button
+          class="community-category-tab"
+          onclick="filterCategory('story')"
+        >
+          경험 공유
+        </button>
+        <button class="community-category-tab" onclick="filterCategory('qna')">
+          질문과 답변
+        </button>
+      </div>
+
+      <!-- Post Grid -->
+      <div id="postGrid">
+        <!-- Posts will be loaded here by JavaScript -->
       </div>
     </div>
-    <!-- End Community Content -->
-<!-- New Post Modal -->
-    <div class="community-modal" id="newPostModal">
-      <div class="community-modal-header">
-        <h2>새 게시글 작성</h2>
-        <button class="community-modal-close" onclick="closeNewPostModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
 
-      
-<!-- Post Detail Modal -->
-    <div class="community-modal" id="postDetailModal" style="max-width: 800px;">
-      <div class="community-modal-header">
-        <h2></h2>
-        <button class="community-modal-close" onclick="closePostDetailModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="post-detail-header">
-        <h3 class="post-detail-title" id="postDetailTitle"></h3>
-        <div class="post-detail-meta">
-          <div class="community-post-author">
-            <div class="community-author-avatar" id="postDetailAvatar"></div>
-            <div class="community-author-info">
-              <span class="community-author-name" id="postDetailAuthor"></span>
-              <span class="community-post-time" id="postDetailTime"></span>
-            </div>
-          </div>
-          
-<script src="community.js"></script>
-</body>
+    <script src="./community.js"></script>
+  </body>
 </html>

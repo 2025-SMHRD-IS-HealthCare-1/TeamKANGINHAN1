@@ -10,7 +10,7 @@ const logger = require("../middlewares/logger");
 
 // 메인 페이지
 router.get("/", logger, (req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
+  res.sendFile(path.join(publicDir, "main.html"));
 });
 
 // 회원가입 페이지
@@ -20,7 +20,7 @@ router.get("/register", (req, res) => {
 
 // 로그인 페이지
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
+  res.sendFile(path.join(publicDir, "main.html"));
 });
 
 // 커뮤니티 페이지
