@@ -10,7 +10,7 @@ const logger = require("../middlewares/logger");
 
 // 메인 페이지
 router.get("/", logger, (req, res) => {
-  res.sendFile(path.join(publicDir, "main.html"));
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
 // 회원가입 페이지
@@ -20,17 +20,7 @@ router.get("/register", (req, res) => {
 
 // 로그인 페이지
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(publicDir, "shield_for_her_login.html"));
-});
-
-// 회원정보 수정 페이지
-router.get("/update", (req, res) => {
-  res.sendFile(path.join(publicDir, "update.html"));
-});
-
-// 회원 탈퇴 페이지
-router.get("/delete", (req, res) => {
-  res.sendFile(path.join(publicDir, "delete.html"));
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
 // 커뮤니티 페이지
