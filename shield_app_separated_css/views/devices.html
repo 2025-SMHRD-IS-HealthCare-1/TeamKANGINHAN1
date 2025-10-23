@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기기 등록 - SHIELD FOR HER</title>
+  <link rel="stylesheet" href="/common.css">
+  <link rel="stylesheet" href="/devices.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <div class="brand">SHIELD FOR HER</div>
+      <div class="nav-actions">
+        <button class="icon-btn" title="알림" onclick="location.href='/notifications'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          </svg>
+          <span class="badge" id="notificationBadge">3</span>
+        </button>
+        <button class="icon-btn" title="설정" onclick="location.href='/settings'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v6m0 6v6m8.66-16.66l-4.24 4.24m-8.84 8.84L2.34 20.66m18.32 0l-4.24-4.24m-8.84-8.84L2.34 3.34"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px;">
+    <!-- Header -->
+    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 48px;">
+      <a href="/" style="width: 48px; height: 48px; border-radius: 16px; border: none; background: var(--white); color: var(--gray-700); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); transition: all 0.2s; text-decoration: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+      </a>
+      <div>
+        <h1 style="font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">기기 등록</h1>
+        <p style="color: var(--gray-600);">새로운 보안 기기를 등록하세요</p>
+      </div>
+    </div>
+
+    <!-- Device Registration Form -->
+    <div style="background: white; border-radius: 24px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 40px;">
+      <div style="display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 20px; background: linear-gradient(135deg, var(--blue), var(--purple)); margin: 0 auto 24px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" style="width: 40px; height: 40px;">
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+          <line x1="12" y1="18" x2="12.01" y2="18"/>
+        </svg>
+      </div>
+
+      <h2 style="text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 32px;">새 기기 정보 입력</h2>
+
+      <form id="deviceForm" onsubmit="handleDeviceSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">디바이스 ID <span style="color: var(--red);">*</span></label>
+          <input class="form-input" type="text" id="deviceId" placeholder="기기 뒷면에 적혀있는 ID를 입력하세요" required />
+          <p style="font-size: 12px; color: var(--gray-500); margin-top: 6px;">기기 뒷면에 적혀있습니다</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">디바이스 타입 <span style="color: var(--red);">*</span></label>
+          <select class="form-input" id="deviceType" required>
+            <option value="">타입을 선택하세요</option>
+            <option value="window">창문 센서</option>
+            <option value="voice">음성 녹음 장치</option>
+            <option value="camera">CCTV 카메라</option>
+            <option value="door">출입문 센서</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">디바이스 이름</label>
+          <input class="form-input" type="text" id="deviceName" placeholder="예: 거실 창문 센서 (선택사항)" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">설치 장소 <span style="color: var(--red);">*</span></label>
+          <input class="form-input" type="text" id="deviceLocation" placeholder="예: 작은방, 거실, 현관" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">설치 일자 <span style="color: var(--red);">*</span></label>
+          <input class="form-input" type="date" id="deviceDate" required />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="location.href='/'">취소</button>
+          <button type="submit" class="btn-primary">등록하기</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Registered Devices List -->
+    <div style="background: white; border-radius: 24px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+      <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; color: var(--gray-900);">등록된 기기</h3>
+      <div id="registeredDevicesList">
+        <!-- Devices will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/devices.js"></script>
+</body>
+</html>

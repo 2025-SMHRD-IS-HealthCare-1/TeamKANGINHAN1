@@ -1,0 +1,154 @@
+/* 알림 페이지 전용 스타일 */
+
+/* 알림 아이템 */
+.notification-page-item {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.notification-page-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.notification-page-item.unread {
+  background: #eff6ff;
+  border-left: 4px solid var(--blue);
+}
+
+/* 알림 타입 배지 */
+.notification-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.notification-type-badge.warning {
+  background: #fee2e2;
+  color: var(--red);
+}
+
+.notification-type-badge.info {
+  background: #dbeafe;
+  color: var(--blue);
+}
+
+.notification-type-badge.success {
+  background: #d1fae5;
+  color: var(--green);
+}
+
+/* 알림 제목 */
+.notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gray-900);
+}
+
+/* 알림 내용 */
+.notification-content {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* 기기 태그 */
+.device-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--gray-100);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+}
+
+.device-tag svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* 알림 메타 정보 */
+.notification-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--gray-500);
+  font-size: 13px;
+}
+
+.notification-new {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* 필터 버튼 */
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* 액션 버튼 그룹 */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* 빈 상태 */
+.notifications-empty {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.notifications-empty svg {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  opacity: 0.3;
+  stroke: var(--gray-400);
+}
+
+.notifications-empty h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gray-700);
+}
+
+.notifications-empty p {
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .notification-page-item {
+    padding: 20px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .filter-buttons {
+    flex-wrap: nowrap;
+  }
+}
