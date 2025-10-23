@@ -25,8 +25,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // 라우터 설정
 app.use("/", pageRouter);
 app.use("/api", apiRouter);
-app.use("/api/rapi/toggle", rapiRouter);
+app.use("/api/rapi", rapiRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+

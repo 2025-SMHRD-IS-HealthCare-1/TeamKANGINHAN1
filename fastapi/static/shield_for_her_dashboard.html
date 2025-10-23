@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SHIELD FOR HER - Dashboard</title>
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --muted:#9aa1ac;
+      --border:#ececf3;
+      --primary:#3a7bd5;
+      --accent:#f6e5ff;
+      --accent-2:#ffe8ef;
+      --toggle-off:#e8f1ff;
+      --danger:#f7a8b8;
+      --text:#1e1f23;
+      --shadow: 0 8px 24px rgba(28,39,63,.08);
+      --radius:20px;
+    }
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple SD Gothic Neo, Noto Sans KR, "맑은 고딕", sans-serif;
+    }
+    .app{
+      max-width: 1100px;
+      margin: 24px auto 80px;
+      padding: 0 20px;
+    }
+
+    /* topbar */
+    .topbar{
+      height:64px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand{
+      font-weight:700;
+      letter-spacing:.3px;
+    }
+    .brand b{
+      padding:8px 12px;
+      border-radius:12px;
+      background:#fff;
+      box-shadow: var(--shadow);
+    }
+    .actions{
+      display:flex; gap:14px; align-items:center;
+    }
+    .icon{
+      width:36px; height:36px; border-radius:50%;
+      display:grid; place-items:center;
+      background:#fff; box-shadow: var(--shadow);
+      color:#555;
+      cursor:pointer;
+    }
+
+    /* layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 320px;
+      gap:24px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    /* left column */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+    @media (max-width: 920px){
+      .cards{ grid-template-columns: 1fr; }
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
+      min-height:108px;
+      position:relative;
+    }
+    .card h4{
+      margin:0 0 12px;
+      font-size:15px;
+      color:#586174;
+      display:flex; align-items:center; gap:8px;
+    }
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:10px;
+      border: 1px dashed #e3e6ef;
+      color:#7b8496;
+      background:#fafbff;
+    }
+    .muted{ color:var(--muted); }
+
+    /* security status big tile */
+    .tile-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:8px;
+    }
+    @media (max-width: 920px){
+      .tile-row{ grid-template-columns: 1fr; }
+    }
+    .tile{
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding:16px;
+      background: linear-gradient(180deg, var(--toggle-off), #f1f6ff);
+      min-height:120px;
+      position:relative;
+    }
+    .tile h3{
+      margin:0 0 16px;
+      font-size:18px;
+      font-weight:700;
+    }
+
+    /* toggle */
+    .toggle{
+      width: 220px;
+      height: 64px;
+      background:#e7f0ff;
+      border-radius: 40px;
+      padding: 6px;
+      position: relative;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,.05);
+      cursor:pointer;
+      transition: background .25s ease;
+    }
+    .knob{
+      width: 52px; height: 52px;
+      background:#d84646;
+      border-radius: 50%;
+      position:absolute;
+      right: 6px; top:6px;
+      box-shadow: 0 8px 20px rgba(216,70,70,.25);
+      transition: all .25s ease;
+    }
+    .toggle.on{ background:#cfe7ff; }
+    .toggle.on .knob{
+      transform: translateX(-156px);
+      background:#3ad57e;
+      box-shadow: 0 8px 20px rgba(58,213,126,.25);
+    }
+
+    /* right column login card */
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px;
+      min-height: 360px;
+    }
+    .panel h4{
+      margin:0 0 4px; font-size:16px;
+    }
+    .panel .lock{
+      margin: 26px auto 16px;
+      width:68px; height:68px; border-radius:16px;
+      display:grid; place-items:center;
+      background:#fafbff; border:1px solid var(--border);
+      color:#888;
+      font-size:28px;
+    }
+    .input{
+      width:100%;
+      background:#fafbff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+      outline: none;
+    }
+    .kakao{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      background:#fee500; border:none;
+      border-radius:12px;
+      padding:12px 14px;
+      width:100%;
+      cursor:pointer;
+      margin-top:10px;
+      font-weight:600;
+    }
+    .kakao small{ color:#333; opacity:.75; font-weight:500; }
+    .help{ font-size:12px; color:var(--muted); text-align:right; margin-top:6px; }
+
+    /* board */
+    .board{
+      background:#fff0fb;
+      border:2px dashed #e8b3ff;
+      border-radius: var(--radius);
+      min-height:120px;
+      padding:16px;
+    }
+    .board h4{ margin:0 0 8px; }
+    .board .placeholder{ color:#b28ac9; }
+
+    /* footer emergency button */
+    .footer{
+      position:fixed; left:0; right:0; bottom:22px;
+      display:flex; justify-content:center;
+      pointer-events:none;
+    }
+    .emergency{
+      pointer-events:auto;
+      border:none;
+      background:#f7c7d2;
+      color:#7c2b3a;
+      padding:14px 22px;
+      border-radius:24px;
+      box-shadow: var(--shadow);
+      font-weight:700;
+      letter-spacing:.2px;
+      cursor:pointer;
+    }
+    .emergency:active{ transform: translateY(1px); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"> <b>SHIELD FOR HER</b> </div>
+      <div class="actions">
+        <div class="icon" title="알림">🔔</div>
+        <div class="icon" title="설정">⚙️</div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- left column -->
+      <section>
+        <div class="cards">
+          <div class="card">
+            <h4>🎤 녹음</h4>
+            <div class="badge">필요한 내용을 입력해 주세요</div>
+          </div>
+          <div class="card">
+            <h4>📹 CCTV</h4>
+            <div class="badge">필요한 내용을 입력해 주세요</div>
+          </div>
+          <div class="card">
+            <h4>🪟 창문</h4>
+            <div class="badge">필요한 내용을 입력해 주세요</div>
+          </div>
+        </div>
+
+        <div class="tile-row">
+          <div class="tile">
+            <h3>보안상태</h3>
+            <div class="toggle" id="secToggle" aria-label="보안 상태 토글" role="switch" aria-checked="false">
+              <div class="knob"></div>
+            </div>
+          </div>
+          <div class="tile">
+            <h3>쉘드포허 게시판</h3>
+            <div class="board">
+              <div class="placeholder">공지/안내 글이 여기에 표시됩니다.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- right column -->
+      <aside class="panel">
+        <div class="lock">🔒</div>
+        <h4>로그인을 완료해주세요</h4>
+        <p class="muted" style="margin-top:6px">맞춤형 알림을 받으려면 로그인</p>
+
+        <label class="muted" style="display:block;margin:16px 0 6px;">이메일</label>
+        <input class="input" type="email" placeholder="이메일 주소를 입력하세요" />
+
+        <button class="kakao" type="button" onclick="alert('카카오 로그인 연동 자리입니다')">
+          <span>카카오 로그인</span>
+          <small>아직 회원이 아니신가요?  회원가입</small>
+        </button>
+        <div class="help">SNS 계정으로 간편하게 로그인</div>
+      </aside>
+    </main>
+  </div>
+
+  <div class="footer">
+    <button class="emergency" onclick="alert('긴급 신고가 접수되었습니다.')">긴급 신고  ⚠️</button>
+  </div>
+
+  <script>
+    // simple toggle interaction
+    const t = document.getElementById('secToggle');
+    t.addEventListener('click', () => {
+      t.classList.toggle('on');
+      const on = t.classList.contains('on');
+      t.setAttribute('aria-checked', on ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>

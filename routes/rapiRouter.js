@@ -6,7 +6,7 @@ const verifyToken = require("../middlewares/jwt");
 const FASTAPI_BASE_URL = "http://192.168.219.148:8001"; // FastAPI 서버 주소
 
 // ✅ 보안 토글 ON/OFF 요청
-router.post("/", verifyToken, async (req, res) => {
+router.post("/toggle", verifyToken, async (req, res) => {
   const { status } = req.body; // 클라이언트에서 { status: "on" } or { status: "off" }
 
   console.log("🔐 보안 상태 변경 요청:", status);
@@ -35,6 +35,12 @@ router.post("/", verifyToken, async (req, res) => {
       message: "FastAPI 요청 실패",
     });
   }
+});
+
+router.get("/toggle", (req, res) => {
+  res.send(
+    "✅ /api/rapi/toggle 경로는 POST 전용입니다. 현재 서버는 정상 작동 중입니다."
+  );
 });
 
 module.exports = router;
