@@ -1,42 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>main</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SHIELD FOR HER - Dashboard</title>
+    <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <h1>API 회원관리 시스템</h1>
-    <div id="userInfo"></div>
-    <a href="/register">회원가입 페이지</a>
-    <a href="/login">로그인 페이지</a>
-    <a href="/update">회원정보 수정 페이지</a>
-    <a href="/delete">회원탈퇴 페이지</a>
+    <!-- Emergency Alert Banner -->
+    <div class="alert-banner" id="alertBanner">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-content">
+        <h3>긴급 신고 접수됨</h3>
+        <p>신고가 정상적으로 접수되었습니다.</p>
+      </div>
+      <button class="alert-close" onclick="closeAlert()">×</button>
+    </div>
+
+    <div class="app">
+      <header class="topbar">
+        <div class="brand"><b>SHIELD FOR HER</b></div>
+        <div class="actions">
+          <div class="icon" title="알림">🔔</div>
+          <div class="icon" title="설정">⚙️</div>
+        </div>
+      </header>
+
+      <main class="grid">
+        <!-- left column -->
+        <section>
+          <div class="cards">
+            <div class="card">
+              <h4>🎤 녹음</h4>
+              <div class="badge">로컬마이크 작동중입니다.</div>
+            </div>
+            <div class="card">
+              <h4>📹 CCTV</h4>
+              <div class="badge">영상녹화가 멈춰있습니다.</div>
+            </div>
+            <div class="card">
+              <h4>창문</h4>
+              <div class="badge">열려있어요!</div>
+            </div>
+          </div>
+
+          <div class="tile-row">
+            <div class="tile">
+              <h3>보안상태</h3>
+              <div
+                class="toggle"
+                id="secToggle"
+                aria-label="보안 상태 토글"
+                role="switch"
+                aria-checked="false"
+              >
+                <div class="knob"></div>
+              </div>
+              <h3>
+                ON &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;OFF
+              </h3>
+            </div>
+
+            <div class="tile">
+              <h3>
+                <a
+                  href="./her_commu.html"
+                  style="text-decoration: none; color: inherit"
+                  >쉴드포허커뮤니티</a
+                >
+              </h3>
+              <div class="board">
+                <a
+                  href="./her_commu.html"
+                  style="text-decoration: none; text-align: right"
+                  class="placeholder"
+                  >새로운 게시물을 확인하세요!</a
+                >
+                <br /><br />
+                <h3 align="right">
+                  <a
+                    href="./her_commu.html"
+                    style="text-decoration: none; color: inherit"
+                    class="placeholder"
+                    >게시판 바로가기 →</a
+                  >
+                </h3>
+              </div>
+            </div>
+
+            <div>
+              <button class="emergency" onclick="triggerEmergency()">
+                긴급신고⚠️
+              </button>
+            </div>
+            <button class="condevice" onclick="triggerEmergency()">
+              기기연결 📎
+            </button>
+          </div>
+        </section>
+
+        <!-- right column -->
+        <aside class="panel" id="userPanel">
+          <div class="lock">🔒</div>
+          <h4>반갑습니다!</h4>
+          <h4>로그인을 완료해주세요</h4>
+
+          <label class="muted" style="display: block; margin: 16px 0 6px"
+            >이메일</label
+          >
+          <input
+            id="loginEmail"
+            class="input"
+            type="email"
+            placeholder="이메일 주소를 입력하세요"
+          />
+
+          <label class="muted" style="display: block; margin: 16px 0 6px"
+            >비밀번호</label
+          >
+          <input
+            id="loginPw"
+            class="input"
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+          />
+
+          <button
+            id="loginBtn"
+            style="text-align: center"
+            class="loginbtn"
+            type="button"
+          >
+            로그인
+          </button>
+
+          <div class="help">
+            <a
+              class="muted"
+              style="text-decoration: none"
+              href="./register.html"
+              >회원가입 하러가기</a
+            >
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script>
+      // 로그인 처리
+      const loginBtn = document.getElementById("loginBtn");
+      loginBtn.addEventListener("click", async () => {
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPw").value.trim();
+
+        if (!email || !password) {
+          alert("이메일과 비밀번호를 입력해주세요.");
+          return;
+        }
+
+        try {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          console.log(data);
+
+          if (data.success) {
+            // ✅ 로그인 성공
+            localStorage.setItem("token", data.token);
+
+            const panel = document.getElementById("userPanel");
+            panel.innerHTML = `
+              <div class="lock">🔓</div>
+              <h4>${data.message}</h4>
+              <p style="color:gray; font-size:14px;">${data.name}님 환영합니다 💗</p>
+              <button class="loginbtn" id="logoutBtn">로그아웃</button>`;
+
+            document
+              .getElementById("logoutBtn")
+              .addEventListener("click", async () => {
+                const token = localStorage.getItem("token");
+
+                if (!token) {
+                  alert("이미 로그아웃 상태입니다.");
+                  return;
+                }
+
+                try {
+                  const res = await fetch("/api/logout", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
+                  });
+
+                  const data = await res.json();
+                  console.log("📤 로그아웃 요청 응답:", data);
+
+                  if (data.success) {
+                    // ✅ 토큰 삭제
+                    localStorage.removeItem("token");
+
+                    alert(data.message || "로그아웃 성공!");
+                    // ✅ 메인 페이지로 이동
+                    window.location.href = "/main.html";
+                  } else {
+                    alert("로그아웃 실패 ❌");
+                  }
+                } catch (err) {
+                  console.error(err);
+                  alert("서버 오류로 로그아웃 실패했습니다.");
+                }
+              });
+          } else {
+            alert("로그인 실패 ❌: " + data.message);
+          }
+        } catch (err) {
+          console.error(err);
+          alert("서버 오류로 로그인 실패했습니다.");
+        }
+      });
+
+      // 보안상태 토글 처리
+      document
+        .getElementById("secToggle")
+        .addEventListener("click", async () => {
+          const toggle = document.getElementById("secToggle");
+
+          // 1️⃣ ON/OFF 상태 변경
+          toggle.classList.toggle("on");
+          const isOn = toggle.classList.contains("on");
+          const status = isOn ? "on" : "off";
+          console.log(`🔄 보안상태: ${status}`);
+
+          // 2️⃣ FastAPI로 상태 전달
+          try {
+            const res = await fetch("/api/rapi/toggle", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+              body: JSON.stringify({ status }),
+            });
+
+            const data = await res.json();
+            console.log("✅ FastAPI 응답:", data.message);
+
+            // 3️⃣ UI 피드백 (ON/OFF 메시지)
+            if (isOn) {
+              alert("🔒 보안 시스템이 활성화되었습니다.");
+            } else {
+              alert("🔓 보안 시스템이 비활성화되었습니다.");
+            }
+          } catch (err) {
+            console.error("❌ FastAPI 호출 실패:", err);
+            alert("FastAPI 서버에 연결할 수 없습니다.");
+          }
+        });
+    </script>
   </body>
-
-  <script>
-    function parseJwt(token) {
-      try {
-        const base64Url = token.split(".")[1];
-        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-        const jsonPayload = decodeURIComponent(
-          atob(base64)
-            .split("")
-            .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-            .join("")
-        );
-        return JSON.parse(jsonPayload);
-      } catch (e) {
-        return null;
-      }
-    }
-
-    const token = localStorage.getItem("token");
-    const payload = parseJwt(token);
-    console.log(payload);
-
-    document.getElementById(
-      "userInfo"
-    ).innerText = `${payload.nick}님 환영합니다!`;
-  </script>
 </html>

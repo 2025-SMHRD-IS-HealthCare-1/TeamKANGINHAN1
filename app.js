@@ -8,6 +8,7 @@ const logger = require("./middlewares/logger");
 
 const pageRouter = require("./routes/pageRouter");
 const apiRouter = require("./routes/apiRouter");
+const rapiRouter = require("./routes/rapiRouter");
 
 // 미들웨어 설정
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // 라우터 설정
 app.use("/", pageRouter);
 app.use("/api", apiRouter);
+app.use("/api/rapi/toggle", rapiRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
