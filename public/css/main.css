@@ -165,7 +165,7 @@ body {
   font-size: 15px;
   color: #586174;
 }
-.badge {
+.log-badge {
   display: inline-block;
   font-size: 12px;
   padding: 8px 10px;
@@ -217,12 +217,12 @@ body {
 
 /* login panel */
 .panel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 22px;
-  min-height: 360px;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 36px 32px;
+  border: 1px solid var(--gray-200);
+  position: sticky;
+  top: 88px;
 }
 .panel .lock {
   margin: 26px auto 16px;
@@ -244,18 +244,42 @@ body {
   padding: 12px 14px;
 }
 .loginbtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #fccef6;
+  width: 100%;
+  padding: 14px;
   border: none;
   border-radius: 12px;
-  padding: 12px 14px;
-  width: 100%;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
-  font-weight: 800;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.btnlogin:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btnlogin:active {
+  transform: translateY(0);
+}
+
+.muted {
+  display: block;
+  text-align: left;
+  margin-top: 16px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.muted:hover {
+  color: var(--blue-dark);
 }
 
 /* board */
@@ -271,28 +295,29 @@ body {
 }
 
 /* buttons */
-.emergency {
+.btn {
+  width: 340px;
+  height: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  background: linear-gradient(135deg, #ff6b9d 0%, #f7a8b8 100%);
-  color: white;
-  padding: 40px 140px;
   border-radius: 24px;
-  box-shadow: var(--shadow-lg);
   font-weight: 700;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.emergency:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
-}
-.condevice {
-  border: none;
-  background: linear-gradient(135deg, #1f54c5 0%, #3e4796 100%);
+  font-size: 22px;
   color: white;
-  padding: 40px 140px;
-  border-radius: 24px;
-  box-shadow: var(--shadow-lg);
-  font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-emergency {
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  box-shadow: 0 10px 30px rgba(255, 95, 109, 0.4);
+}
+.btn-device {
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  box-shadow: 0 10px 30px rgba(91, 134, 229, 0.4);
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
 }

@@ -3,7 +3,7 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const verifyToken = require("../middlewares/jwt");
 
-const FASTAPI_BASE_URL = "http://192.168.219.148:8001"; // FastAPI 서버 주소
+const FASTAPI_BASE_URL = "http://192.168.219.148:8000"; // FastAPI 서버 주소
 
 // ✅ 보안 토글 ON/OFF 요청
 router.post("/toggle", verifyToken, async (req, res) => {

@@ -4,10 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SHIELD FOR HER - Dashboard</title>
+
+    <!-- ✅ 스타일 시트 -->
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/tt.css" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   </head>
+
   <body>
-    <!-- Emergency Alert Banner -->
+    <!-- ✅ 긴급 알림 배너 -->
     <div class="alert-banner" id="alertBanner">
       <div class="alert-icon">⚠️</div>
       <div class="alert-content">
@@ -17,135 +23,141 @@
       <button class="alert-close" onclick="closeAlert()">×</button>
     </div>
 
-    <div class="app">
-      <header class="topbar">
-        <div class="brand"><b>SHIELD FOR HER</b></div>
-        <div class="actions">
-          <div class="icon" title="알림">🔔</div>
-          <div class="icon" title="설정">⚙️</div>
+    <!-- ✅ 네비게이션 -->
+    <nav class="nav">
+      <div class="nav-content">
+        <div class="brand" onclick="window.location.href='main.html'">
+          SHIELD FOR HER
         </div>
-      </header>
+        <div class="nav-actions">
+          <button class="icon-btn" title="알림">
+            🔔
+            <span class="badge">3</span>
+          </button>
+          <button class="icon-btn" title="설정" onclick="openSettings()">
+            ⚙️
+          </button>
+        </div>
+      </div>
+    </nav>
 
-      <main class="grid">
-        <!-- left column -->
-        <section>
-          <div class="cards">
-            <div class="card">
-              <h4>🎤 녹음</h4>
-              <div class="badge">로컬마이크 작동중입니다.</div>
-            </div>
-            <div class="card">
-              <h4>📹 CCTV</h4>
-              <div class="badge">영상녹화가 멈춰있습니다.</div>
-            </div>
-            <div class="card">
-              <h4>창문</h4>
-              <div class="badge">열려있어요!</div>
-            </div>
+    <!-- ✅ 메인 컨텐츠 -->
+    <main class="grid">
+      <!-- 🔹 Left Column -->
+      <section>
+        <!-- 센서 로그 카드 -->
+        <div class="cards">
+          <div class="card" id="audioLogOpen">
+            <h4>🎙 녹음</h4>
+            <p id="lastAudioLog" class="log-badge">최근 감지: 없음</p>
           </div>
 
-          <div class="tile-row">
-            <div class="tile">
-              <h3>보안상태</h3>
-              <div
-                class="toggle"
-                id="secToggle"
-                aria-label="보안 상태 토글"
-                role="switch"
-                aria-checked="false"
-              >
-                <div class="knob"></div>
-              </div>
-              <h3>
-                ON &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;OFF
-              </h3>
-            </div>
+          <div class="card" id="cctvLogOpen">
+            <h4>📹 CCTV</h4>
+            <p id="lastCctvLog" class="log-badge">최근 감지: 없음</p>
+          </div>
 
-            <div class="tile">
-              <h3>
+          <div class="card" id="windowLogOpen">
+            <h4>🚪 창문</h4>
+            <p id="lastWindowLog" class="log-badge">최근 감지: 없음</p>
+          </div>
+        </div>
+
+        <!-- 보안 상태 + 커뮤니티 타일 -->
+        <div class="tile-row">
+          <div class="tile">
+            <h3>보안상태</h3>
+            <div
+              class="toggle"
+              id="secToggle"
+              aria-label="보안 상태 토글"
+              role="switch"
+              aria-checked="false"
+            >
+              <div class="knob"></div>
+            </div>
+            <h3 style="margin-top: 10px; color: #555; font-weight: 600">
+              ON &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;OFF
+            </h3>
+          </div>
+
+          <div class="tile">
+            <h3>
+              <a
+                href="./community.html"
+                style="text-decoration: none; color: inherit"
+                >쉴드포허 커뮤니티</a
+              >
+            </h3>
+            <div class="board">
+              <a
+                href="./community.html"
+                style="text-decoration: none; text-align: right"
+                class="placeholder"
+                >새로운 게시물을 확인하세요!</a
+              >
+              <br /><br />
+              <h3 align="right">
                 <a
                   href="./community.html"
                   style="text-decoration: none; color: inherit"
-                  >쉴드포허커뮤니티</a
+                  class="placeholder"
+                  >게시판 바로가기 →</a
                 >
               </h3>
-              <div class="board">
-                <a
-                  href="./community.html"
-                  style="text-decoration: none; text-align: right"
-                  class="placeholder"
-                  >새로운 게시물을 확인하세요!</a
-                >
-                <br /><br />
-                <h3 align="right">
-                  <a
-                    href="./community.html"
-                    style="text-decoration: none; color: inherit"
-                    class="placeholder"
-                    >게시판 바로가기 →</a
-                  >
-                </h3>
-              </div>
             </div>
-
-            <div>
-              <button class="emergency" onclick="triggerEmergency()">
-                긴급신고⚠️
-              </button>
-            </div>
-            <button class="condevice" onclick="triggerEmergency()">
-              기기연결 📎
-            </button>
           </div>
-        </section>
+        </div>
 
-        <!-- right column -->
-        <aside class="panel" id="userPanel">
-          <div class="lock">🔒</div>
-          <h4>반갑습니다!</h4>
-          <h4>로그인을 완료해주세요</h4>
+        <!-- 긴급 신고 / 기기 연결 버튼 -->
+        <button class="btn btn-emergency">🚨 긴급 신고</button>
+        <button class="btn btn-device">🔌 기기 연결</button>
+      </section>
 
-          <label class="muted" style="display: block; margin: 16px 0 6px"
-            >이메일</label
+      <!-- 🔹 Right Column -->
+      <aside class="panel" id="userPanel">
+        <div class="lock">🔒</div>
+        <h4>반갑습니다!</h4>
+        <h4>로그인을 완료해주세요</h4>
+
+        <label class="muted" style="display: block; margin: 16px 0 6px"
+          >이메일</label
+        >
+        <input
+          id="loginEmail"
+          class="input"
+          type="email"
+          placeholder="이메일 주소를 입력하세요"
+        />
+
+        <label class="muted" style="display: block; margin: 16px 0 6px"
+          >비밀번호</label
+        >
+        <input
+          id="loginPw"
+          class="input"
+          type="password"
+          placeholder="비밀번호를 입력하세요"
+        />
+
+        <button
+          id="loginBtn"
+          style="text-align: center"
+          class="loginbtn"
+          type="button"
+        >
+          로그인
+        </button>
+
+        <div class="help">
+          <a class="muted" style="text-decoration: none" href="./register.html"
+            >회원가입 →</a
           >
-          <input
-            id="loginEmail"
-            class="input"
-            type="email"
-            placeholder="이메일 주소를 입력하세요"
-          />
+        </div>
+      </aside>
+    </main>
 
-          <label class="muted" style="display: block; margin: 16px 0 6px"
-            >비밀번호</label
-          >
-          <input
-            id="loginPw"
-            class="input"
-            type="password"
-            placeholder="비밀번호를 입력하세요"
-          />
-
-          <button
-            id="loginBtn"
-            style="text-align: center"
-            class="loginbtn"
-            type="button"
-          >
-            로그인
-          </button>
-
-          <div class="help">
-            <a
-              class="muted"
-              style="text-decoration: none"
-              href="./register.html"
-              >회원가입 하러가기</a
-            >
-          </div>
-        </aside>
-      </main>
-    </div>
-
+    <!-- ✅ 스크립트 -->
     <script src="./js/main.js"></script>
   </body>
 </html>

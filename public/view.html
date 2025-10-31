@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시글 상세보기</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/tt.css" />
+    <link rel="stylesheet" href="css/view.css" />
+  </head>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <div class="brand" onclick="window.location.href='main.html'">
+        SHIELD FOR HER
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" title="알림">
+          🔔
+          <span class="badge">3</span>
+        </button>
+        <button class="icon-btn" title="설정" onclick="openSettings()">
+          ⚙️
+        </button>
+      </div>
+    </div>
+  </nav>
+  <body>
+    <div class="post-view-container">
+      <div style="max-width: 1400px; margin: 0 auto; padding: 40px 24px">
+        <!-- Header -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 16px">
+            <button class="btn-back" onclick="window.location.href='community.html'">
+              ←
+            </button>
+
+            <h1 class="post-view-title" id="postTitle"
+              style="font-size: 36px; font-weight: 800; letter-spacing: -0.02em"
+            >
+              게시글 제목
+            </h1>
+          </div>
+        </div>
+
+
+      <!-- ✅ 작성자 / 작성일 -->
+      <div class="post-view-meta">
+        <div class="post-view-author">
+          <div class="post-author-avatar" id="postAvatar">H</div>
+          <div>
+            <span id="postAuthor">작성자</span><br />
+            <span id="postDate" style="font-size: 13px; color: #777"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✅ 내용 -->
+      <div class="post-view-content" id="postContent">
+        게시글 내용이 여기에 표시됩니다.
+      </div>
+
+      <!-- ✅ 좋아요 / 조회수 -->
+      <div class="post-view-stats">
+        <span class="heart-icon" style="cursor: pointer">🤍</span>
+        <span id="likeCount">0</span>
+        <span>👁 <span id="viewCount">0</span></span>
+        <span>💬 <span id="commentCount">0</span></span>
+      </div>
+
+      <!-- ✅ 댓글 영역 -->
+      <div class="comment-section">
+        <h3 class="comment-header">
+          💬댓글 <span id="commentCountText">(0)</span>
+        </h3>
+
+        <!-- 댓글 리스트 -->
+        <div id="commentsList"></div>
+
+        <!-- 댓글 입력 -->
+        <div class="comment-form">
+          <input
+            id="commentInput"
+            class="comment-input"
+            placeholder="댓글을 입력하세요"
+          />
+          <button id="commentSubmit" class="comment-submit">등록</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/view.js"></script>
+  </body>
+</html>

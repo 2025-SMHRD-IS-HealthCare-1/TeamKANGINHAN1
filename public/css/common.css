@@ -64,14 +64,35 @@ body {
   align-items: center;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 .brand {
   font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.05em;
   background: linear-gradient(135deg, var(--blue), var(--purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.brand:hover {
+  background-image: linear-gradient(to right, var(--blue), var(--purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .nav-actions {
@@ -204,9 +225,26 @@ body {
   margin-top: 32px;
 }
 
+.dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
-  .nav-content {
-    padding: 16px;
+  .btn {
+    width: 280px;
+    height: 100px;
+    font-size: 18px;
+  }
+  .community-post-card {
+    padding: 18px;
+  }
+  .post-view-container {
+    padding: 28px 20px;
   }
 }

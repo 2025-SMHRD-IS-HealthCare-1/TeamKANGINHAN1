@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T_USER 회원가입</title>
+  </head>
+  <body>
+    <h1>회원가입 페이지</h1>
+
+    <label>이메일:</label>
+    <input type="email" id="email" maxlength="50" /><br />
+
+    <label>비밀번호:</label>
+    <input type="password" id="pw" maxlength="20" /><br />
+
+    <label>이름:</label>
+    <input type="text" id="name" maxlength="20" /><br />
+
+    <label>휴대폰 번호:</label>
+    <input type="text" id="phone" placeholder="010-1234-5678" /><br />
+
+    <label>주소:</label>
+    <input type="text" id="address" maxlength="100" /><br />
+
+    <label>비상연락처:</label>
+    <input type="text" id="em_phone" placeholder="010-9876-5432" /><br />
+
+    <label>디바이스 번호:</label>
+    <input type="text" id="device_no" placeholder="장치번호 입력" /><br />
+
+    <label>피해 경험:</label>
+    <input type="text" id="harassment" placeholder="예: 없음 / 있다" /><br />
+
+    <button id="joinBtn">회원가입</button>
+
+    <script>
+      const joinBtn = document.getElementById("joinBtn");
+
+      joinBtn.addEventListener("click", async () => {
+        const EMAIL = document.getElementById("email").value;
+        const PASSWORD = document.getElementById("pw").value;
+        const NAME = document.getElementById("name").value;
+        const PHONE_NUMBER = document.getElementById("phone").value;
+        const ADDRESS = document.getElementById("address").value;
+        const EM_PHONE_NUMBER = document.getElementById("em_phone").value;
+        const DEVICE_NO = document.getElementById("device_no").value;
+        const HARASSMENT_EXP = document.getElementById("harassment").value;
+
+        // ✅ 모든 입력값 유효성 검사
+        if (!EMAIL || !PASSWORD || !NAME) {
+          alert("이메일, 비밀번호, 이름은 필수입니다.");
+          return;
+        }
+
+        const bodyData = {
+          EMAIL,
+          PASSWORD,
+          NAME,
+          PHONE_NUMBER,
+          ADDRESS,
+          EM_PHONE_NUMBER,
+          DEVICE_NO,
+          HARASSMENT_EXP,
+        };
+
+        // ✅ 서버로 POST 요청
+        const res = await fetch("/api/members", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.success) {
+          alert("회원가입 성공!");
+          window.location.href = "/login.html";
+        } else {
+          alert("회원가입 실패: " + data.message);
+        }
+      });
+    </script>
+  </body>
+</html>

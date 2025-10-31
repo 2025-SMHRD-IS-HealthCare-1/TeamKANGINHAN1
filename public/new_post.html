@@ -11,50 +11,16 @@
     <!-- Navigation -->
     <nav class="nav">
       <div class="nav-content">
-        <div class="brand">SHIELD FOR HER</div>
+        <div class="brand" onclick="window.location.href='main.html'">
+          SHIELD FOR HER
+        </div>
         <div class="nav-actions">
-          <button
-            class="icon-btn"
-            title="알림"
-            onclick="location.href='/notifications'"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-            </svg>
+          <button class="icon-btn" title="알림">
+            🔔
             <span class="badge">3</span>
           </button>
-          <button
-            class="icon-btn"
-            title="설정"
-            onclick="location.href='/settings'"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="3" />
-              <path
-                d="M12 1v6m0 6v6m8.66-16.66l-4.24 4.24m-8.84 8.84L2.34 20.66m18.32 0l-4.24-4.24m-8.84-8.84L2.34 3.34"
-              />
-            </svg>
+          <button class="icon-btn" title="설정" onclick="openSettings()">
+            ⚙️
           </button>
         </div>
       </div>
@@ -72,7 +38,7 @@
         "
       >
         <a
-          href="/community"
+          href="./community.html"
           style="
             width: 48px;
             height: 48px;
@@ -128,7 +94,8 @@
           box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
         "
       >
-        <form id="postForm" onsubmit="handlePostSubmit(event)">
+        <!-- ✅ onsubmit 제거! method="POST"도 제거 -->
+        <form id="postForm">
           <div class="form-group">
             <label class="form-label"
               >카테고리 <span style="color: var(--red)">*</span></label
@@ -172,8 +139,6 @@
             ></textarea>
           </div>
 
-          
-
           <div
             style="
               background: var(--gray-50);
@@ -211,16 +176,19 @@
             <button
               type="button"
               class="btn-secondary"
-              onclick="location.href='/community'"
+              onclick="location.href='./community.html'"
             >
               취소
             </button>
-            <button type="submit" class="btn-primary">게시글 작성</button>
+            <button type="submit" class="btn-primary" id="submitBtn">
+              게시글 작성
+            </button>
           </div>
         </form>
       </div>
     </div>
 
+    <!-- ✅ JavaScript 파일만 사용 -->
     <script src="./js/new_post.js"></script>
   </body>
 </html>

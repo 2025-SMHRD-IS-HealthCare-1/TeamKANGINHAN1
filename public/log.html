@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>녹음 / 영상 로그</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      body {
+        font-family: Pretendard, sans-serif;
+        background: #f8fafc;
+        color: #333;
+        padding: 40px;
+      }
+
+      h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      th {
+        background: #f0f4ff;
+        font-weight: 600;
+      }
+
+      tr:hover {
+        background: #f9fcff;
+      }
+
+      .backBtn {
+        display: inline-block;
+        margin-top: 24px;
+        padding: 10px 18px;
+        background: #4f46e5;
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="logTitle">로그 조회</h2>
+    <table id="logTable">
+      <thead>
+        <tr>
+          <th>파일명</th>
+          <th>경로</th>
+          <th>용량(MB)</th>
+          <th>길이(초)</th>
+          <th>등록일</th>
+        </tr>
+      </thead>
+      <tbody id="logBody">
+        <tr>
+          <td colspan="5" style="text-align: center">데이터 불러오는 중...</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="/main.html" class="backBtn">← 메인으로</a>
+
+    <script src="/js/log.js"></script>
+  </body>
+</html>

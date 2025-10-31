@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
         message: "유효하지 않은 토큰입니다",
       });
     }
-    req.use = user;
+    req.user = user;
     next();
   });
 };

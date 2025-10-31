@@ -1,0 +1,159 @@
+/* ==============================
+   📄 게시글 상세페이지 (view.html)
+   ============================== */
+
+/* ✅ 전체 컨테이너 */
+.post-view-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 48px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* ✅ 제목 */
+.post-view-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+/* ✅ 작성자 및 날짜 정보 */
+.post-view-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  color: #666;
+  font-size: 14px;
+}
+
+.post-view-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-author-avatar {
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  color: #fff;
+  font-weight: 700;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ 게시글 내용 */
+.post-view-content {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+  margin-bottom: 36px;
+  white-space: pre-line;
+}
+
+/* ✅ 통계 (좋아요, 조회수, 댓글 수) */
+.post-view-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+  border-top: 1px solid #eee;
+  padding: 14px 0;
+  margin-bottom: 24px;
+}
+
+/* ✅ 댓글 영역 */
+.comment-section {
+  padding-top: 28px;
+}
+
+.comment-header {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.comment-item {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.comment-item-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.comment-item-content {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ✅ 댓글 입력폼 */
+.comment-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.comment-input {
+  flex: 1;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  padding: 12px 16px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.comment-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.comment-submit {
+  background: linear-gradient(135deg, var(--blue), var(--purple));
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.comment-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* ✅ 반응형 */
+@media (max-width: 768px) {
+  .post-view-container {
+    padding: 28px 20px;
+  }
+
+  .post-view-title {
+    font-size: 22px;
+  }
+
+  .comment-item {
+    padding: 12px 14px;
+  }
+}
